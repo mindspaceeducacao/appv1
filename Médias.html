@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Médias do Aluno | MindSpace</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link id="favicon" rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2224%22%20height=%2224%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22currentColor%22%20stroke-width=%222%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%20class=%22icon%20icon-tabler%20icons-tabler-outline%20icon-tabler-chart-bar-popular%22%3E%3Cpath%20stroke=%22none%22%20d=%22M0%200h24v24H0z%22%20fill=%22none%22%20/%3E%3Cpath%20d=%22M3%2013a1%201%200%200%201%201%20-1h4a1%201%200%200%201%201%201v6a1%201%200%200%201%20-1%201h-4a1%201%200%200%201%20-1%20-1l0%20-6%22%20/%3E%3Cpath%20d=%22M9%209a1%201%200%200%201%201%20-1h4a1%201%200%200%201%201%201v10a1%201%200%200%201%20-1%201h-4a1%201%200%200%201%20-1%20-1l0%20-10%22%20/%3E%3Cpath%20d=%22M15%205a1%201%200%200%201%201%20-1h4a1%201%200%200%201%201%201v14a1%201%200%200%201%20-1%201h-4a1%201%200%200%201%20-1%20-1l0%20-14%22%20/%3E%3Cpath%20d=%22M4%2020h14%22%20/%3E%3C/svg%3E">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0f172a;
+    --royal: #2563eb;
+    --sky: #3b82f6;
+    --gray-blue: #64748b;
+    --border-gray: #e2e8f0;
+    --bg: #f8fafc;
+    --white: #ffffff;
+    --emerald: #10b981;
+  }
+
+  body { 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+    background: var(--bg); 
+    color: var(--navy);
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  .main-container { width: 100%; max-width: 600px; margin: 0 auto; animation: fadeIn 0.6s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  .btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--gray-blue);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+    padding: 10px 16px;
+    border-radius: 12px;
+    transition: all 0.2s;
+    background: white;
+    border: 1px solid var(--border-gray);
+  }
+  .btn-back:hover { color: var(--royal); background: #f1f5f9; transform: translateX(-5px); }
+
+  .header { margin-bottom: 40px; text-align: center; }
+  .header h1 { font-size: 2rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
+  .header p { color: var(--gray-blue); font-weight: 500; }
+
+  .card {
+    background: var(--white);
+    padding: 35px;
+    border-radius: 32px;
+    border: 1px solid var(--border-gray);
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.05);
+  }
+
+  .input-group { margin-bottom: 24px; }
+  .input-group label { display: block; font-size: 0.85rem; font-weight: 800; color: var(--gray-blue); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+  
+  .row { display: grid; grid-template-columns: 1fr 120px; gap: 15px; align-items: center; }
+  
+  .input-text {
+    width: 100%;
+    padding: 14px 20px;
+    border-radius: 14px;
+    border: 2px solid var(--border-gray);
+    font-family: inherit;
+    font-weight: 600;
+    outline: none;
+    transition: all 0.2s;
+  }
+  .input-text:focus { border-color: var(--royal); }
+  .input-text.val { text-align: center; font-weight: 800; color: var(--royal); font-size: 1.1rem; }
+
+  .media-final-box {
+    margin-top: 30px;
+    padding: 25px;
+    background: #f1f5f9;
+    border-radius: 24px;
+    text-align: center;
+  }
+  .media-final-box label { color: var(--navy); font-size: 1rem; margin-bottom: 15px; }
+  .media-val {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--navy);
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: center;
+    outline: none;
+  }
+
+  .info-text { font-size: 0.75rem; color: var(--gray-blue); margin-top: 20px; text-align: center; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<div class="main-container">
+  <a href="teste-prof.html" class="btn-back">
+    <i class="ti ti-arrow-left"></i> Voltar ao Painel
+  </a>
+
+  <div class="header">
+    <h1 id="titulo-pagina">Lançamento de Notas</h1>
+    <p id="subtitulo-materia">Controle de rendimento escolar</p>
+  </div>
+
+  <div class="card">
+    <div class="input-group">
+      <label>Atividade 1 (Max: 10.0)</label>
+      <div class="row">
+        <input type="text" class="input-text salvavel" id="t1" placeholder="Nome da atividade">
+        <input type="number" step="1.0" class="input-text val salvavel" id="n1" data-max="10.0" placeholder="0.0">
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label>Atividade 2 (Max: 10.0)</label>
+      <div class="row">
+        <input type="text" class="input-text salvavel" id="t2" placeholder="Nome da atividade">
+        <input type="number" step="10.0" class="input-text val salvavel" id="n2" data-max="10.0" placeholder="0.0">
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label>Atividade 3 (Max: 10.0)</label>
+      <div class="row">
+        <input type="text" class="input-text salvavel" id="t3" placeholder="Nome da atividade">
+        <input type="number" step=1.0" class="input-text val salvavel" id="n3" data-max="10.0" placeholder="0.0">
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label>Outros (Max: 10.0)</label>
+      <div class="row">
+        <input type="text" class="input-text salvavel" id="titulo_outros" placeholder="Participação, etc">
+        <input type="number" step="1.0" class="input-text val salvavel" id="n_outros" data-max="10.0" placeholder="0.0">
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label>Avaliação Final (Max: 10.0)</label>
+      <div class="row">
+        <input type="text" class="input-text" value="Avaliação Acadêmica Diagnóstica" disabled>
+        <input type="number" step="1.0" class="input-text val salvavel" id="n_prova" data-max="10.0" placeholder="0.0">
+      </div>
+    </div>
+
+    <div class="media-final-box">
+      <label>MÉDIA FINAL</label>
+      <input type="text" id="media_final" class="media-val" value="0.0" readonly>
+    </div>
+
+    <p class="info-text">Os dados são salvos automaticamente conforme você digita.</p>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getDatabase, ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAs3OTqOeVVzcxlrcM8Th5ObkhtXca69Ac",
+    authDomain: "mindspace-educacao.firebaseapp.com",
+    projectId: "mindspace-educacao",
+    storageBucket: "mindspace-educacao.firebasestorage.app",
+    messagingSenderId: "569394609531",
+    appId: "1:569394609531:web:9ab5ba6bc2181bc5a911de",
+    databaseURL: "https://mindspace-educacao-default-rtdb.firebaseio.com/"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  // --- LÓGICA DE IDENTIFICAÇÃO IGUAL AO PAINEL ---
+  const usuarioFull = sessionStorage.getItem('usuario') || "hadassaartes"; 
+  const materiaAtiva = sessionStorage.getItem('materia') || "Artes";
+  const usuarioAtivo = usuarioFull.replace(/(artes|port|cien|mat)$/, "");
+
+  const configMaterias = {
+    "Ciências": { db: "cien", icon: "data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2224%22%20height=%2224%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22currentColor%22%20stroke-width=%222%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%20class=%22icon%20icon-tabler%20icons-tabler-outline%20icon-tabler-chart-bar-popular%22%3E%3Cpath%20stroke=%22none%22%20d=%22M0%200h24v24H0z%22%20fill=%22none%22%20/%3E%3Cpath%20d=%22M3%2013a1%201%200%200%201%201%20-1h4a1%201%200%200%201%201%201v6a1%201%200%200%201%20-1%201h-4a1%201%200%200%201%20-1%20-1l0%20-6%22%20/%3E%3Cpath%20d=%22M9%209a1%201%200%200%201%201%20-1h4a1%201%200%200%201%201%201v10a1%201%200%200%201%20-1%201h-4a1%201%200%200%201%20-1%20-1l0%20-10%22%20/%3E%3Cpath%20d=%22M15%205a1%201%200%200%201%201%20-1h4a1%201%200%200%201%201%201v14a1%201%200%200%201%20-1%201h-4a1%201%200%200%201%20-1%20-1l0%20-14%22%20/%3E%3Cpath%20d=%22M4%2020h14%22%20/%3E%3C/svg%3E" },
+    "Português": { db: "port", icon: "data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2224%22%20height=%2224%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22currentColor%22%20stroke-width=%222%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%20class=%22icon%20icon-tabler%20icons-tabler-outline%20icon-tabler-chart-bar-popular%22%3E%3Cpath%20stroke=%22none%22%20d=%22M0%200h24v24H0z%22%20fill=%22none%22%20/%3E%3Cpath%20d=%22M3%2013a1%201%200%200%201%201%20-1h4a1%201%200%200%201%201%201v6a1%201%200%200%201%20-1%201h-4a1%201%200%200%201%20-1%20-1l0%20-6%22%20/%3E%3Cpath%20d=%22M9%209a1%201%200%200%201%201%20-1h4a1%201%200%200%201%201%201v10a1%201%200%200%201%20-1%201h-4a1%201%200%200%201%20-1%20-1l0%20-10%22%20/%3E%3Cpath%20d=%22M15%205a1%201%200%200%201%201%20-1h4a1%201%200%200%201%201%201v14a1%201%200%200%201%20-1%201h-4a1%201%200%200%201%20-1%20-1l0%20-14%22%20/%3E%3Cpath%20d=%22M4%2020h14%22%20/%3E%3C/svg%3E" },
+    "Matemática": { db: "mat", icon: "data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2224%22%20height=%2224%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22currentColor%22%20stroke-width=%222%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%20class=%22icon%20icon-tabler%20icons-tabler-outline%20icon-tabler-chart-bar-popular%22%3E%3Cpath%20stroke=%22none%22%20d=%22M0%200h24v24H0z%22%20fill=%22none%22%20/%3E%3Cpath%20d=%22M3%2013a1%201%200%200%201%201%20-1h4a1%201%200%200%201%201%201v6a1%201%200%200%201%20-1%201h-4a1%201%200%200%201%20-1%20-1l0%20-6%22%20/%3E%3Cpath%20d=%22M9%209a1%201%200%200%201%201%20-1h4a1%201%200%200%201%201%201v10a1%201%200%200%201%20-1%201h-4a1%201%200%200%201%20-1%20-1l0%20-10%22%20/%3E%3Cpath%20d=%22M15%205a1%201%200%200%201%201%20-1h4a1%201%200%200%201%201%201v14a1%201%200%200%201%20-1%201h-4a1%201%200%200%201%20-1%20-1l0%20-14%22%20/%3E%3Cpath%20d=%22M4%2020h14%22%20/%3E%3C/svg%3E" },
+    "Artes": { db: "artes", icon: "data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2224%22%20height=%2224%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22currentColor%22%20stroke-width=%222%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%20class=%22icon%20icon-tabler%20icons-tabler-outline%20icon-tabler-chart-bar-popular%22%3E%3Cpath%20stroke=%22none%22%20d=%22M0%200h24v24H0z%22%20fill=%22none%22%20/%3E%3Cpath%20d=%22M3%2013a1%201%200%200%201%201%20-1h4a1%201%200%200%201%201%201v6a1%201%200%200%201%20-1%201h-4a1%201%200%200%201%20-1%20-1l0%20-6%22%20/%3E%3Cpath%20d=%22M9%209a1%201%200%200%201%201%20-1h4a1%201%200%200%201%201%201v10a1%201%200%200%201%20-1%201h-4a1%201%200%200%201%20-1%20-1l0%20-10%22%20/%3E%3Cpath%20d=%22M15%205a1%201%200%200%201%201%20-1h4a1%201%200%200%201%201%201v14a1%201%200%200%201%20-1%201h-4a1%201%200%200%201%20-1%20-1l0%20-14%22%20/%3E%3Cpath%20d=%22M4%2020h14%22%20/%3E%3C/svg%3E" }
+  };
+
+  const config = configMaterias[materiaAtiva] || configMaterias["Artes"];
+  const materiaDb = config.db;
+
+  // Atualiza UI
+  document.title = `Notas de ${materiaAtiva}`;
+  document.getElementById('favicon').href = config.icon;
+  document.getElementById('subtitulo-materia').innerText = `Disciplina: ${materiaAtiva}`;
+
+  // CAMINHO DINÂMICO: ex: hadassa/cien ou daniel/port
+  const dbRef = ref(db, `${usuarioAtivo}/${materiaDb}`);
+
+  const campos = document.querySelectorAll('.salvavel');
+  const camposNotas = document.querySelectorAll('.val');
+  const displayMedia = document.getElementById('media_final');
+
+  function calcularMedia() {
+    let total = 0;
+    camposNotas.forEach(nota => {
+      let valor = parseFloat(nota.value) || 0;
+      let maximo = parseFloat(nota.getAttribute('data-max'));
+      if (valor > maximo) { valor = maximo; nota.value = maximo; }
+      total += valor;
+    });
+    displayMedia.value = total.toFixed(1);
+  }
+
+  // LER DADOS
+  onValue(dbRef, (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+      campos.forEach(campo => {
+        if (data[campo.id] !== undefined) {
+          campo.value = data[campo.id];
+        }
+      });
+      calcularMedia();
+    }
+  });
+
+  // SALVAR AO DIGITAR
+  campos.forEach(campo => {
+    campo.addEventListener('input', () => {
+      if (campo.classList.contains('val')) calcularMedia();
+      update(dbRef, { [campo.id]: campo.value });
+    });
+  });
+
+</script>
+</body>
+</html>

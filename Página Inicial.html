@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MindSpace</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="icon" type="image/png" href="https://i.ibb.co/fs6QsSL/FAVICON.png?v=3">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #1d2b64;
+    --royal: #2b57c3;
+    --sky: #5c83f1;
+    --gray-blue: #708ea8;
+    --border-gray: #e0e0e0;
+    --bg: #f4f7ff;
+  }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--navy); min-height: 100vh; overflow-x: hidden; }
+
+  .blobs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.15; animation: blobFloat 14s ease-in-out infinite; }
+  .blob1 { width: 520px; height: 520px; background: var(--sky); top: -120px; left: -120px; animation-delay: 0s; }
+  .blob2 { width: 420px; height: 420px; background: var(--royal); bottom: -60px; right: -100px; animation-delay: -5s; }
+  .blob3 { width: 280px; height: 280px; background: var(--navy); top: 42%; left: 52%; animation-delay: -9s; }
+  @keyframes blobFloat {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(28px,-28px) scale(1.04); }
+    66% { transform: translate(-18px,18px) scale(0.96); }
+  }
+
+  .page { position: relative; z-index: 1; }
+
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2.5rem;
+    background: rgba(255,255,255,0.72); backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border-gray);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .logo img { height: 36px; display: block; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--gray-blue);
+    font-size: 0.88rem; font-weight: 500;
+    transition: color 0.2s ease;
+  }
+  .nav-links a:hover { color: var(--royal); }
+
+  .hero { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 6rem 2rem 4rem; gap: 2rem; }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 6px 18px; border-radius: 999px;
+    background: rgba(44,87,195,0.08); border: 1px solid rgba(44,87,195,0.18);
+    color: var(--royal); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em;
+    animation: fadeDown 0.6s ease both;
+  }
+  .pulse-dot { width: 7px; height: 7px; background: var(--royal); border-radius: 50%; display: inline-block; animation: pulse 1.8s ease infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.45;transform:scale(1.5)} }
+
+  .hero-title { font-size: clamp(2.4rem, 5vw, 3.75rem); font-weight: 800; line-height: 1.15; color: var(--navy); max-width: 700px; animation: fadeDown 0.7s ease 0.1s both; }
+  .hero-title .highlight { background: linear-gradient(135deg, var(--royal), var(--sky)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  .hero-sub { font-size: 1.05rem; color: var(--gray-blue); max-width: 480px; line-height: 1.8; font-weight: 400; animation: fadeDown 0.7s ease 0.2s both; }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, var(--royal), var(--sky));
+    color: white; font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700; font-size: 0.97rem;
+    padding: 0.9rem 2.2rem; border-radius: 999px; border: none;
+    cursor: pointer; text-decoration: none;
+    animation: fadeDown 0.7s ease 0.3s both;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(44,87,195,0.3); filter: brightness(1.07); }
+
+  .stats-row { display: flex; gap: 0.85rem; justify-content: center; flex-wrap: wrap; animation: fadeDown 0.7s ease 0.4s both; }
+  .stat-pill {
+    display: flex; align-items: center; gap: 7px;
+    background: white; border: 1px solid var(--border-gray);
+    border-radius: 999px; padding: 7px 16px;
+    font-size: 0.82rem; font-weight: 500; color: var(--navy);
+    box-shadow: 0 2px 10px rgba(29,43,100,0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .stat-pill:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(29,43,100,0.1); border-color: var(--sky); }
+  .stat-pill i { color: var(--sky); font-size: 15px; }
+
+  .section-divider { text-align: center; padding: 1rem 0 2rem; animation: fadeUp 0.7s ease 0.5s both; }
+  .section-divider p { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-blue); }
+
+  .subjects-section { padding: 0 2rem 5rem; max-width: 820px; margin: 0 auto; }
+  .subjects-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; }
+
+  .subject-widget {
+    background: white; border: 1.5px solid var(--border-gray);
+    border-radius: 22px; padding: 2rem 1rem 1.6rem;
+    display: flex; flex-direction: column; align-items: center; gap: 0.9rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  }
+  .widget-icon-wrap {
+    width: 58px; height: 58px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center; font-size: 26px;
+    transition: background 0.25s ease;
+  }
+  .widget-label { font-size: 0.88rem; font-weight: 700; color: var(--navy); text-align: center; }
+
+  .sw-mat .widget-icon-wrap { background: rgba(44,87,195,0.09); color: var(--royal); }
+  .sw-mat:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(44,87,195,0.12); border-color: rgba(44,87,195,0.35); background: #fafbff; }
+  .sw-mat:hover .widget-icon-wrap { background: rgba(44,87,195,0.16); }
+
+  .sw-sci .widget-icon-wrap { background: rgba(14,164,122,0.09); color: #0ea47a; }
+  .sw-sci:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(14,164,122,0.12); border-color: rgba(14,164,122,0.32); background: #f7fdfb; }
+  .sw-sci:hover .widget-icon-wrap { background: rgba(14,164,122,0.17); }
+
+  .sw-por .widget-icon-wrap { background: rgba(112,142,168,0.1); color: var(--gray-blue); }
+  .sw-por:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(112,142,168,0.15); border-color: rgba(112,142,168,0.38); background: #f8fafc; }
+  .sw-por:hover .widget-icon-wrap { background: rgba(112,142,168,0.18); }
+
+  .sw-art .widget-icon-wrap { background: rgba(195,91,43,0.09); color: #c35b2b; }
+  .sw-art:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(195,91,43,0.11); border-color: rgba(195,91,43,0.3); background: #fffaf7; }
+  .sw-art:hover .widget-icon-wrap { background: rgba(195,91,43,0.17); }
+
+  .subject-widget:nth-child(1) { animation: fadeUp 0.6s ease 0.65s both; }
+  .subject-widget:nth-child(2) { animation: fadeUp 0.6s ease 0.75s both; }
+  .subject-widget:nth-child(3) { animation: fadeUp 0.6s ease 0.85s both; }
+  .subject-widget:nth-child(4) { animation: fadeUp 0.6s ease 0.95s both; }
+
+  @keyframes fadeDown { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+  footer { text-align: center; padding: 2rem; color: var(--gray-blue); font-size: 0.78rem; border-top: 1px solid var(--border-gray); background: rgba(255,255,255,0.5); }
+
+  html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+<div class="blobs">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+</div>
+
+<div class="page">
+  <nav>
+    <a class="logo" href="#">
+      <img src="https://i.ibb.co/5Xt1fpRP/Mind-Space-Logo.png" alt="MindSpace" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="#">Início</a></li>
+      <li><a href="#materias">Matérias</a></li>
+      <li><a href="https://mindspaceeducacao.github.io/MindCards/">MindCards</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="badge">
+      <span class="pulse-dot"></span>
+      Sistema de ensino inteligente
+    </div>
+
+    <h1 class="hero-title">
+      Aprenda de forma<br>
+      <span class="highlight">inteligente</span> com o MindSpace
+    </h1>
+
+    <p class="hero-sub">
+      O MindSpace é um sistema de ensino desenvolvido para tornar o aprendizado mais dinâmico, acessível e eficaz para todos os estudantes.
+    </p>
+
+    <a class="btn-primary" href="#">
+      <i class="ti ti-login"></i>
+      Entrar no portal
+    </a>
+
+    <div class="stats-row">
+      <div class="stat-pill"><i class="ti ti-users"></i> Comunidade ativa</div>
+      <div class="stat-pill"><i class="ti ti-books"></i> 4 matérias disponíveis</div>
+      <div class="stat-pill"><i class="ti ti-device-desktop"></i> Acesso de qualquer lugar</div>
+    </div>
+  </section>
+
+  <div class="section-divider">
+    <p>Nossas matérias</p>
+  </div>
+
+  <section class="subjects-section" id="materias">
+    <div class="subjects-grid">
+      <div class="subject-widget sw-mat">
+        <div class="widget-icon-wrap"><i class="ti ti-math"></i></div>
+        <div class="widget-label">Matemática</div>
+      </div>
+      <div class="subject-widget sw-sci">
+        <div class="widget-icon-wrap"><i class="ti ti-microscope"></i></div>
+        <div class="widget-label">Ciências</div>
+      </div>
+      <div class="subject-widget sw-por">
+        <div class="widget-icon-wrap"><i class="ti ti-letter-case"></i></div>
+        <div class="widget-label">Língua Portuguesa</div>
+      </div>
+      <div class="subject-widget sw-art">
+        <div class="widget-icon-wrap"><i class="ti ti-palette"></i></div>
+        <div class="widget-label">Artes</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 MindSpace · Todos os direitos reservados
+  </footer>
+</div>
+</body>
+</html>

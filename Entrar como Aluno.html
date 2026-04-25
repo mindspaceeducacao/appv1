@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrar como Aluno</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2224%22%20height=%2224%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22%231d2b64%22%20stroke-width=%222%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%20class=%22icon%20icon-tabler%20icons-tabler-outline%20icon-tabler-school%22%3E%3Cpath%20stroke=%22none%22%20d=%22M0%200h24v24H0z%22%20fill=%22none%22%20/%3E%3Cpath%20d=%22M22%209l-10%20-4l-10%204l10%204l10%20-4v6%22%20/%3E%3Cpath%20d=%22M6%2010.6v5.4a6%203%200%200%200%2012%200v-5.4%22%20/%3E%3C/svg%3E">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #1d2b64;
+    --royal: #2b57c3;
+    --sky: #5c83f1;
+    --gray-blue: #708ea8;
+    --border-gray: #e0e0e0;
+    --bg: #f4f7ff;
+  }
+
+  body { 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+    background: var(--bg); 
+    color: var(--navy); 
+    min-height: 100vh; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    overflow: hidden; 
+  }
+
+  /* Blobs de fundo */
+  .blobs { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.15; animation: blobFloat 14s ease-in-out infinite; }
+  .blob1 { width: 600px; height: 600px; background: var(--sky); top: -150px; left: -150px; }
+  .blob2 { width: 500px; height: 500px; background: var(--royal); bottom: -100px; right: -100px; animation-delay: -5s; }
+  
+  @keyframes blobFloat {
+    0%,100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(40px,-40px) scale(1.05); }
+  }
+
+  /* Card de Login Horizontal */
+  .login-card {
+    position: relative;
+    z-index: 1;
+    background: white;
+    width: 920px;
+    display: flex;
+    border-radius: 32px;
+    box-shadow: 0 30px 70px rgba(29,43,100,0.15);
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.7);
+  }
+
+  /* Esquerda */
+  .login-info {
+    flex: 1;
+    background: linear-gradient(145deg, var(--navy), var(--royal));
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+  }
+
+  .login-info .logo img { height: 34px; filter: brightness(0) invert(1); margin-bottom: 3rem; }
+
+  .header-icon {
+    width: 64px;
+    height: 64px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin-bottom: 1.5rem;
+  }
+
+  .login-info h1 { font-size: 2.4rem; font-weight: 800; margin-bottom: 1.2rem; line-height: 1.1; }
+  .login-info p { font-size: 1rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
+
+  /* Direita */
+  .login-form-side {
+    flex: 1.2;
+    padding: 5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: white;
+  }
+
+  .instructions {
+    color: var(--gray-blue);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+  }
+
+  /* Grid de Inputs - Fonte Ajustada */
+  .code-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+    margin-bottom: 3rem;
+  }
+
+  .code-input {
+    width: 100%;
+    height: 70px;
+    border: 2px solid var(--border-gray);
+    border-radius: 18px;
+    text-align: center;
+    /* Forçando a fonte correta do projeto */
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--navy);
+    transition: all 0.25s ease;
+    outline: none;
+    background: #fcfdff;
+    text-transform: lowercase; /* O código é 17h3ba */
+  }
+
+  .code-input:focus {
+    border-color: var(--sky);
+    box-shadow: 0 0 0 5px rgba(92, 131, 241, 0.12);
+    transform: translateY(-2px);
+    background: white;
+  }
+
+  /* Botão */
+  .btn-primary {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(135deg, var(--royal), var(--sky));
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 1.3rem;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(43, 87, 195, 0.3);
+  }
+
+  .back-link {
+    margin-top: 2.5rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--gray-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  /* Mensagem de erro caso erre o código */
+  #error-msg {
+    color: #ff4d4d;
+    font-size: 0.85rem;
+    margin-top: 10px;
+    font-weight: 600;
+    display: none;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="blobs">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+</div>
+
+<div class="login-card">
+  <div class="login-info">
+    
+    <div class="header-icon">
+      <i class="ti ti-shield-lock"></i>
+    </div>
+    <h1>Acesso do<br>Aluno</h1>
+    <p>Insira os caracteres contidos na sua <b>carta de acesso</b> para prosseguir para a área do aluno.</p>
+  </div>
+
+  <div class="login-form-side">
+    <p class="instructions">Código de 6 dígitos:</p>
+    
+    <form id="loginForm">
+      <div class="code-container">
+        <input type="text" maxlength="1" class="code-input" autofocus autocomplete="off">
+        <input type="text" maxlength="1" class="code-input" autocomplete="off">
+        <input type="text" maxlength="1" class="code-input" autocomplete="off">
+        <input type="text" maxlength="1" class="code-input" autocomplete="off">
+        <input type="text" maxlength="1" class="code-input" autocomplete="off">
+        <input type="text" maxlength="1" class="code-input" autocomplete="off">
+      </div>
+
+      <button type="submit" class="btn-primary">
+        <i class="ti ti-login"></i>
+        Entrar agora
+      </button>
+      <p id="error-msg">Código incorreto. Verifique sua carta.</p>
+    </form>
+
+    <a href="mindspace_portal.html" class="back-link">
+      <i class="ti ti-chevron-left"></i> Voltar para perfis
+    </a>
+  </div>
+</div>
+
+<script>
+   const inputs = document.querySelectorAll('.code-input');
+  const errorMsg = document.getElementById('error-msg');
+  const codeGrid = document.getElementById('codeGrid');
+  const CORRECT_CODE = "17h3ba"; 
+  const REDIRECT_URL = "https://seulinkaqui.com"; // <-- Cole seu link aqui
+
+  // Navegação entre campos
+  inputs.forEach((input, index) => {
+    input.addEventListener('input', (e) => {
+      errorMsg.style.display = 'none';
+      if (e.target.value.length === 1 && index < inputs.length - 1) {
+        inputs[index + 1].focus();
+      }
+    });
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace' && !e.target.value && index > 0) {
+        inputs[index - 1].focus();
+      }
+    });
+  });
+
+  // Validação APENAS ao clicar no botão (Submit)
+  document.getElementById('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    // Concatena os valores
+    const typedCode = Array.from(inputs).map(i => i.value.toLowerCase()).join('');
+    
+    if(typedCode === CORRECT_CODE) {
+        window.location.href = REDIRECT_URL;
+    } else {
+        errorMsg.style.display = 'block';
+        codeGrid.style.animation = 'shake 0.5s ease';
+        setTimeout(() => { codeGrid.style.animation = ''; }, 500);
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal | MindSpace</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2224%22%20height=%2224%22%20viewBox=%220%200%2024%2024%22%20fill=%22%231d2b64%22%20class=%22icon%20icon-tabler%20icons-tabler-filled%20icon-tabler-user%22%3E%3Cpath%20stroke=%22none%22%20d=%22M0%200h24v24H0z%22%20fill=%22none%22%20/%3E%3Cpath%20d=%22M12%202a5%205%200%201%201%20-5%205l.005%20-.217a5%205%200%200%201%204.995%20-4.783z%22%20/%3E%3Cpath%20d=%22M14%2014a5%205%200%200%201%205%205v1a2%202%200%200%201%20-2%202h-10a2%202%200%200%201%20-2%20-2v-1a5%205%200%200%201%205%20-5h4z%22%20/%3E%3C/svg%3E">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #1d2b64;
+    --royal: #2b57c3;
+    --sky: #5c83f1;
+    --gray-blue: #708ea8;
+    --border-gray: #e0e0e0;
+  }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    background: #f4f7ff;
+    overflow: hidden;
+  }
+
+  /* LADO ESQUERDO — ilustração */
+  .left {
+    flex: 1;
+    background: linear-gradient(145deg, var(--navy) 0%, #1a3a8f 50%, var(--royal) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+  }
+
+  /* círculos decorativos */
+  .deco-circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.08);
+  }
+  .dc1 { width: 420px; height: 420px; top: -80px; left: -80px; }
+  .dc2 { width: 280px; height: 280px; bottom: -60px; right: -60px; }
+  .dc3 { width: 180px; height: 180px; top: 50%; left: 60%; }
+  .dc4 { width: 100px; height: 100px; top: 20%; right: 15%; background: rgba(92,131,241,0.08); border: none; }
+
+  /* ilustração SVG centralizada */
+  .illustration { position: relative; z-index: 1; margin-bottom: 2.5rem; }
+
+  .left-text { position: relative; z-index: 1; text-align: center; }
+  .left-text h2 { font-size: 1.6rem; font-weight: 800; color: white; line-height: 1.25; margin-bottom: 0.6rem; }
+  .left-text p { font-size: 0.9rem; color: rgba(255,255,255,0.55); font-weight: 400; max-width: 280px; line-height: 1.7; }
+
+  .left-logo { position: absolute; top: 2rem; left: 2rem; z-index: 2; }
+  .left-logo img { height: 32px; filter: brightness(0) invert(1); opacity: 0.9; }
+
+  /* LADO DIREITO — login */
+  .right {
+    width: 420px;
+    flex-shrink: 0;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem 2.8rem;
+    box-shadow: -8px 0 40px rgba(29,43,100,0.1);
+  }
+
+  .right-header { margin-bottom: 2.5rem; }
+  .right-header span {
+    display: inline-block;
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--sky); margin-bottom: 0.6rem;
+  }
+  .right-header h1 { font-size: 1.75rem; font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 0.5rem; }
+  .right-header p { font-size: 0.88rem; color: var(--gray-blue); line-height: 1.65; }
+
+  .divider {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 1.8rem;
+  }
+  .divider-line { flex: 1; height: 1px; background: var(--border-gray); }
+  .divider span { font-size: 0.75rem; color: var(--gray-blue); font-weight: 500; white-space: nowrap; }
+
+  .btn-portal {
+    display: flex; align-items: center; gap: 14px;
+    width: 100%; padding: 1rem 1.4rem;
+    border-radius: 16px; border: 1.5px solid var(--border-gray);
+    background: white; cursor: pointer; text-decoration: none;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+    margin-bottom: 1rem;
+  }
+  .btn-portal:last-of-type { margin-bottom: 0; }
+
+  .btn-portal:hover { transform: translateY(-3px); border-color: transparent; }
+
+  .btn-aluno:hover { box-shadow: 0 10px 30px rgba(44,87,195,0.18); background: #fafbff; border-color: rgba(44,87,195,0.25); }
+  .btn-professor:hover { box-shadow: 0 10px 30px rgba(29,43,100,0.15); background: #f8f9fc; border-color: rgba(29,43,100,0.2); }
+
+  .btn-icon-wrap {
+    width: 46px; height: 46px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+    transition: background 0.22s ease;
+  }
+  .btn-aluno .btn-icon-wrap { background: rgba(44,87,195,0.1); color: var(--royal); }
+  .btn-aluno:hover .btn-icon-wrap { background: rgba(44,87,195,0.17); }
+  .btn-professor .btn-icon-wrap { background: rgba(29,43,100,0.08); color: var(--navy); }
+  .btn-professor:hover .btn-icon-wrap { background: rgba(29,43,100,0.14); }
+
+  .btn-text { flex: 1; text-align: left; }
+  .btn-text strong { display: block; font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+  .btn-text small { font-size: 0.78rem; color: var(--gray-blue); font-weight: 400; }
+
+  .btn-arrow { color: var(--gray-blue); font-size: 18px; transition: transform 0.22s ease, color 0.22s ease; }
+  .btn-portal:hover .btn-arrow { transform: translateX(3px); color: var(--royal); }
+
+  .right-footer { margin-top: 2rem; text-align: center; font-size: 0.75rem; color: var(--gray-blue); }
+  .right-footer a { color: var(--royal); text-decoration: none; font-weight: 600; }
+  .right-footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<!-- ESQUERDA -->
+<div class="left">
+  <div class="deco-circle dc1"></div>
+  <div class="deco-circle dc2"></div>
+  <div class="deco-circle dc3"></div>
+  <div class="deco-circle dc4"></div>
+
+  <div class="left-logo">
+    <img src="https://i.ibb.co/5Xt1fpRP/Mind-Space-Logo.png" alt="MindSpace" />
+  </div>
+
+  <!-- Ilustração SVG -->
+  <div class="illustration">
+    <svg width="260" height="220" viewBox="0 0 260 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Mesa -->
+      <rect x="30" y="168" width="200" height="10" rx="5" fill="rgba(255,255,255,0.12)"/>
+      <rect x="50" y="178" width="10" height="30" rx="4" fill="rgba(255,255,255,0.08)"/>
+      <rect x="200" y="178" width="10" height="30" rx="4" fill="rgba(255,255,255,0.08)"/>
+
+      <!-- Laptop base -->
+      <rect x="60" y="130" width="140" height="90" rx="8" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+      <!-- Laptop tela -->
+      <rect x="72" y="58" width="116" height="80" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+      <!-- tela conteúdo -->
+      <rect x="82" y="68" width="96" height="8" rx="3" fill="rgba(255,255,255,0.25)"/>
+      <rect x="82" y="82" width="60" height="5" rx="2" fill="rgba(255,255,255,0.13)"/>
+      <rect x="82" y="92" width="80" height="5" rx="2" fill="rgba(255,255,255,0.1)"/>
+      <rect x="82" y="102" width="50" height="5" rx="2" fill="rgba(255,255,255,0.1)"/>
+      <!-- botão teclado -->
+      <rect x="115" y="148" width="30" height="4" rx="2" fill="rgba(255,255,255,0.1)"/>
+
+      <!-- Livro esquerda -->
+      <rect x="18" y="100" width="36" height="48" rx="4" fill="rgba(92,131,241,0.35)" stroke="rgba(92,131,241,0.5)" stroke-width="1"/>
+      <rect x="22" y="108" width="22" height="3" rx="1.5" fill="rgba(255,255,255,0.4)"/>
+      <rect x="22" y="115" width="16" height="2" rx="1" fill="rgba(255,255,255,0.2)"/>
+      <rect x="22" y="120" width="20" height="2" rx="1" fill="rgba(255,255,255,0.2)"/>
+
+      <!-- Livro direita -->
+      <rect x="206" y="108" width="36" height="42" rx="4" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+      <rect x="212" y="116" width="20" height="3" rx="1.5" fill="rgba(255,255,255,0.3)"/>
+      <rect x="212" y="123" width="14" height="2" rx="1" fill="rgba(255,255,255,0.15)"/>
+
+      <!-- Estrela / brilhos -->
+      <circle cx="205" cy="52" r="4" fill="rgba(255,255,255,0.4)"/>
+      <circle cx="55" cy="46" r="3" fill="rgba(92,131,241,0.6)"/>
+      <circle cx="230" cy="88" r="2.5" fill="rgba(255,255,255,0.25)"/>
+      <circle cx="28" cy="74" r="2" fill="rgba(255,255,255,0.2)"/>
+
+      <!-- Ícone chapéu de formatura acima da tela -->
+      <g transform="translate(113, 22)">
+        <rect x="-18" y="8" width="36" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
+        <polygon points="0,0 20,10 0,14 -20,10" fill="rgba(255,255,255,0.5)"/>
+        <line x1="18" y1="10" x2="24" y2="22" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="24" cy="24" r="2.5" fill="rgba(92,131,241,0.7)"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="left-text">
+    <h2>Bem-vindo ao<br>Portal MindSpace</h2>
+    <p>Acesse sua conta e continue aprendendo de onde parou.</p>
+  </div>
+</div>
+
+<!-- DIREITA -->
+<div class="right">
+  <div class="right-header">
+    <span>Acesso ao portal</span>
+    <h1>Como você quer entrar?</h1>
+    <p>Escolha o seu perfil para acessar a plataforma.</p>
+  </div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span>Selecione um perfil</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <a href="#" class="btn-portal btn-aluno">
+    <div class="btn-icon-wrap"><i class="ti ti-school"></i></div>
+    <div class="btn-text">
+      <strong>Entrar como Aluno</strong>
+      <small>Acesse aulas, atividades e conteúdos</small>
+    </div>
+    <i class="ti ti-arrow-right btn-arrow"></i>
+  </a>
+
+  <a href="#" class="btn-portal btn-professor">
+    <div class="btn-icon-wrap"><i class="ti ti-chalkboard"></i></div>
+    <div class="btn-text">
+      <strong>Entrar como Professor</strong>
+      <small>Gerencie turmas e materiais</small>
+    </div>
+    <i class="ti ti-arrow-right btn-arrow"></i>
+  </a>
+
+  <div class="right-footer">
+    <a href="#">← Voltar ao site</a>
+  </div>
+</div>
+
+</body>
+</html>

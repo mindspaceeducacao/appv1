@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agenda</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2224%22%20height=%2224%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22currentColor%22%20stroke-width=%222%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%20class=%22icon%20icon-tabler%20icons-tabler-outline%20icon-tabler-calendar-event%22%3E%3Cpath%20stroke=%22none%22%20d=%22M0%200h24v24H0z%22%20fill=%22none%22%20/%3E%3Cpath%20d=%22M4%207a2%202%200%200%201%202%20-2h12a2%202%200%200%201%202%202v12a2%202%200%200%201%20-2%202h-12a2%202%200%200%201%20-2%20-2l0%20-12%22%20/%3E%3Cpath%20d=%22M16%203l0%204%22%20/%3E%3Cpath%20d=%22M8%203l0%204%22%20/%3E%3Cpath%20d=%22M4%2011l16%200%22%20/%3E%3Cpath%20d=%22M8%2015h2v2h-2l0%20-2%22%20/%3E%3C/svg%3E">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0f172a;
+    --royal: #2563eb;
+    --sky: #3b82f6;
+    --gray-blue: #64748b;
+    --border-gray: #e2e8f0;
+    --bg: #f8fafc;
+    --white: #ffffff;
+    --emerald: #10b981;
+  }
+
+  body { 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+    background: var(--bg); 
+    color: var(--navy);
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .wrapper { width: 100%; max-width: 900px; animation: fadeIn 0.6s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* HEADER */
+  header { margin-bottom: 40px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .btn-back { 
+    display: inline-flex; align-items: center; gap: 8px; 
+    text-decoration: none; color: var(--gray-blue); 
+    font-weight: 700; font-size: 0.9rem; margin-bottom: 12px;
+    transition: 0.2s;
+  }
+  .btn-back:hover { color: var(--royal); transform: translateX(-4px); }
+  header h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; }
+
+  /* CALENDÁRIO */
+  .calendar-card {
+    background: var(--white);
+    border-radius: 28px;
+    border: 1px solid var(--border-gray);
+    padding: 32px;
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
+  }
+
+  .calendar-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 32px;
+  }
+  .month-title { font-size: 1.4rem; font-weight: 800; color: var(--navy); }
+  .nav-btns { display: flex; gap: 8px; }
+  .btn-nav {
+    width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--border-gray);
+    background: white; color: var(--navy); cursor: pointer; transition: 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .btn-nav:hover { background: var(--bg); border-color: var(--royal); color: var(--royal); }
+
+  .weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-bottom: 10px; }
+  .weekdays span { text-align: center; font-size: 0.75rem; font-weight: 800; color: var(--gray-blue); text-transform: uppercase; letter-spacing: 1px; }
+
+  .days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+  .day {
+    aspect-ratio: 1/1; border-radius: 16px; border: 1px solid var(--border-gray);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; cursor: pointer; transition: 0.2s; position: relative;
+    background: white;
+  }
+  .day:hover { transform: scale(1.05); border-color: var(--royal); color: var(--royal); z-index: 2; }
+  .day.today { background: var(--navy); color: white; border-color: var(--navy); }
+  .day.has-task::after {
+    content: ''; position: absolute; bottom: 8px; width: 6px; height: 6px;
+    background: var(--emerald); border-radius: 50%;
+  }
+
+  /* MODAL ESTILIZADO */
+  .modal {
+    position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 1000;
+  }
+  .modal-content {
+    background: white; width: 90%; max-width: 500px; padding: 32px;
+    border-radius: 28px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+    animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes modalPop { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+  .modal-header { margin-bottom: 24px; }
+  .modal-header h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 4px; }
+  .modal-header p { color: var(--gray-blue); font-weight: 500; font-size: 0.95rem; }
+
+  textarea {
+    width: 100%; height: 150px; border-radius: 18px; border: 1px solid var(--border-gray);
+    padding: 20px; font-family: inherit; font-size: 1rem; font-weight: 600;
+    resize: none; outline: none; transition: 0.2s; background: var(--bg);
+  }
+  textarea:focus { border-color: var(--royal); background: white; box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
+
+  .modal-footer { display: flex; gap: 12px; margin-top: 24px; }
+  .btn-save { 
+    flex: 2; background: var(--royal); color: white; border: none; padding: 16px;
+    border-radius: 14px; font-weight: 700; cursor: pointer; transition: 0.2s;
+  }
+  .btn-save:hover { filter: brightness(1.1); transform: translateY(-2px); }
+  .btn-close { 
+    flex: 1; background: var(--bg); color: var(--navy); border: none; padding: 16px;
+    border-radius: 14px; font-weight: 700; cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+  <header>
+    <div>
+      <a href="javascript:history.back()" class="btn-back"><i class="ti ti-chevron-left"></i> Voltar</a>
+      <h1>Agenda de Planejamento</h1>
+    </div>
+    <i class="ti ti-calendar-event" style="font-size: 3rem; color: var(--royal); opacity: 0.2;"></i>
+  </header>
+
+  <div class="calendar-card">
+    <div class="calendar-nav">
+      <div class="month-title" id="month-display">Janeiro 2024</div>
+      <div class="nav-btns">
+        <button class="btn-nav" onclick="changeMonth(-1)"><i class="ti ti-chevron-left"></i></button>
+        <button class="btn-nav" onclick="changeMonth(1)"><i class="ti ti-chevron-right"></i></button>
+      </div>
+    </div>
+
+    <div class="weekdays">
+      <span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span>
+    </div>
+
+    <div class="days-grid" id="calendar-grid"></div>
+  </div>
+</div>
+
+<div class="modal" id="task-modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="modal-title">Plano do Dia</h2>
+      <p>O que será trabalhado nesta data?</p>
+    </div>
+    <textarea id="task-text" placeholder="Ex: Iniciar capítulo 4, aplicar dinâmica de grupo..."></textarea>
+    <div class="modal-footer">
+      <button class="btn-close" onclick="closeModal()">Cancelar</button>
+      <button class="btn-save" id="save-task">Salvar Plano</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getDatabase, ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAs3OTqOeVVzcxlrcM8Th5ObkhtXca69Ac",
+    authDomain: "mindspace-educacao.firebaseapp.com",
+    projectId: "mindspace-educacao",
+    storageBucket: "mindspace-educacao.firebasestorage.app",
+    messagingSenderId: "569394609531",
+    appId: "1:569394609531:web:9ab5ba6bc2181bc5a911de",
+    databaseURL: "https://mindspace-educacao-default-rtdb.firebaseio.com/"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const tasksRef = ref(db, 'daniel_lucca/artes/agenda');
+
+  let date = new Date();
+  let allTasks = {};
+  let currentSelectedDay = "";
+
+  function renderCalendar() {
+    const grid = document.getElementById('calendar-grid');
+    const monthDisplay = document.getElementById('month-display');
+    grid.innerHTML = '';
+
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    
+    monthDisplay.innerText = new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric' }).format(date);
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const lastDay = new Date(year, month + 1, 0).getDate();
+
+    // Espaços vazios
+    for (let i = 0; i < firstDay; i++) {
+      grid.appendChild(document.createElement('div'));
+    }
+
+    // Dias do mês
+    const today = new Date();
+    for (let i = 1; i <= lastDay; i++) {
+      const dayId = `${year}-${month + 1}-${i}`;
+      const isToday = i === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+      const hasTask = allTasks[dayId] && allTasks[dayId].trim() !== '';
+
+      const dayEl = document.createElement('div');
+      dayEl.className = `day ${isToday ? 'today' : ''} ${hasTask ? 'has-task' : ''}`;
+      dayEl.innerText = i;
+      dayEl.onclick = () => openModal(i, dayId);
+      grid.appendChild(dayEl);
+    }
+  }
+
+  window.changeMonth = (val) => {
+    date.setMonth(date.getMonth() + val);
+    renderCalendar();
+  };
+
+  window.openModal = (num, id) => {
+    currentSelectedDay = id;
+    document.getElementById('modal-title').innerText = `Dia ${num}`;
+    document.getElementById('task-text').value = allTasks[id] || '';
+    document.getElementById('task-modal').style.display = 'flex';
+    document.getElementById('task-text').focus();
+  };
+
+  window.closeModal = () => {
+    document.getElementById('task-modal').style.display = 'none';
+  };
+
+  document.getElementById('save-task').onclick = () => {
+    const text = document.getElementById('task-text').value;
+    update(tasksRef, { [currentSelectedDay]: text }).then(() => closeModal());
+  };
+
+  onValue(tasksRef, (snapshot) => {
+    allTasks = snapshot.val() || {};
+    renderCalendar();
+  });
+
+  // Fechar modal ao clicar fora
+  window.onclick = (event) => {
+    const modal = document.getElementById('task-modal');
+    if (event.target == modal) closeModal();
+  }
+</script>
+</body>
+</html>
