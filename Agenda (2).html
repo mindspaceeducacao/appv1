@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minha Agenda</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2224%22%20height=%2224%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22currentColor%22%20stroke-width=%222%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%20class=%22icon%20icon-tabler%20icons-tabler-outline%20icon-tabler-calendar-event%22%3E%3Cpath%20stroke=%22none%22%20d=%22M0%200h24v24H0z%22%20fill=%22none%22%20/%3E%3Cpath%20d=%22M4%207a2%202%200%200%201%202%20-2h12a2%202%200%200%201%202%202v12a2%202%200%200%201%20-2%202h-12a2%202%200%200%201%20-2%20-2l0%20-12%22%20/%3E%3Cpath%20d=%22M16%203l0%204%22%20/%3E%3Cpath%20d=%22M8%203l0%204%22%20/%3E%3Cpath%20d=%22M4%2011l16%200%22%20/%3E%3Cpath%20d=%22M8%2015h2v2h-2l0%20-2%22%20/%3E%3C/svg%3E">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:        #1d2b64;
+    --royal:       #2b57c3;
+    --sky:         #5c83f1;
+    --gray-blue:   #708ea8;
+    --border-gray: #e0e0e0;
+    --bg:          #f4f7ff;
+    --emerald:     #0ea47a;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--navy);
+    min-height: 100vh;
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .wrapper {
+    width: 100%; max-width: 800px;
+    animation: fadeUp 0.45s ease;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── HEADER ── */
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+  }
+  .btn-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    text-decoration: none; color: var(--gray-blue);
+    font-weight: 600; font-size: 0.83rem;
+    margin-bottom: 0.6rem;
+    transition: color 0.2s, transform 0.2s;
+  }
+  .btn-back:hover { color: var(--royal); transform: translateX(-3px); }
+  .page-header h1 {
+    font-size: 1.75rem; font-weight: 800; letter-spacing: -0.5px;
+  }
+
+  /* ── CALENDAR CARD ── */
+  .calendar-card {
+    background: white;
+    border: 1px solid var(--border-gray);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 4px 24px rgba(29,43,100,0.07);
+  }
+
+  .calendar-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+  .month-title {
+    font-size: 1.1rem; font-weight: 800;
+    text-transform: capitalize; color: var(--navy);
+  }
+  .nav-arrows { display: flex; gap: 6px; }
+  .btn-nav {
+    width: 38px; height: 38px; border-radius: 10px;
+    border: 1px solid var(--border-gray);
+    background: white; cursor: pointer; color: var(--gray-blue);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .btn-nav:hover { border-color: var(--royal); color: var(--royal); background: rgba(44,87,195,0.05); }
+
+  .weekdays {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    gap: 8px; margin-bottom: 8px;
+  }
+  .weekdays span {
+    text-align: center; font-size: 0.65rem; font-weight: 800;
+    color: var(--gray-blue); text-transform: uppercase; letter-spacing: 0.08em;
+  }
+
+  .days-grid {
+    display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px;
+  }
+
+  .day {
+    aspect-ratio: 1/1; border-radius: 12px;
+    border: 1px solid var(--border-gray);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.88rem;
+    cursor: pointer; position: relative; background: white;
+    transition: transform 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
+  }
+  .day:hover {
+    transform: translateY(-2px);
+    border-color: var(--royal); color: var(--royal);
+    box-shadow: 0 4px 12px rgba(44,87,195,0.1);
+  }
+  .day.today {
+    background: var(--navy); color: white; border-color: var(--navy);
+  }
+  .day.today:hover { box-shadow: 0 4px 16px rgba(29,43,100,0.25); }
+
+  .day.has-task::after {
+    content: ''; position: absolute; bottom: 6px;
+    width: 5px; height: 5px;
+    background: var(--sky); border-radius: 50%;
+  }
+  .day.today.has-task::after { background: rgba(255,255,255,0.7); }
+
+  /* ── MODAL ── */
+  .modal {
+    position: fixed; inset: 0;
+    background: rgba(29,43,100,0.4);
+    backdrop-filter: blur(6px);
+    display: none; align-items: center; justify-content: center;
+    z-index: 1000;
+  }
+  .modal-content {
+    background: white; width: 90%; max-width: 440px;
+    padding: 2rem; border-radius: 22px;
+    border: 1px solid var(--border-gray);
+    box-shadow: 0 24px 60px rgba(29,43,100,0.18);
+    animation: modalPop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes modalPop {
+    from { transform: scale(0.92); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+
+  .modal-head {
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--bg);
+  }
+  .modal-head h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 2px; }
+  .modal-head p {
+    font-size: 0.65rem; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--gray-blue);
+  }
+
+  #view-text {
+    font-size: 0.92rem; font-weight: 500;
+    line-height: 1.65; color: var(--navy);
+    white-space: pre-wrap; margin-bottom: 1.5rem;
+    min-height: 50px;
+  }
+  .empty-note {
+    color: var(--gray-blue); font-size: 0.84rem;
+    font-weight: 600; font-style: italic;
+  }
+
+  .btn-close {
+    width: 100%; padding: 0.9rem;
+    background: linear-gradient(135deg, var(--navy), #2a3d8c);
+    color: white; border: none; border-radius: 12px;
+    font-family: inherit; font-size: 0.9rem; font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+  }
+  .btn-close:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(29,43,100,0.22);
+    filter: brightness(1.08);
+  }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <div class="page-header">
+    <div>
+      <a href="inicio.html" class="btn-back">
+        <i class="ti ti-arrow-left"></i> Voltar
+      </a>
+      <h1>Agenda de Aulas</h1>
+    </div>
+    <i class="ti ti-calendar-check" style="font-size: 2.5rem; color: var(--sky); opacity: 0.25;"></i>
+  </div>
+
+  <div class="calendar-card">
+    <div class="calendar-nav">
+      <div class="month-title" id="month-display">Mês Ano</div>
+      <div class="nav-arrows">
+        <button class="btn-nav" onclick="changeMonth(-1)"><i class="ti ti-chevron-left"></i></button>
+        <button class="btn-nav" onclick="changeMonth(1)"><i class="ti ti-chevron-right"></i></button>
+      </div>
+    </div>
+
+    <div class="weekdays">
+      <span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span>
+    </div>
+
+    <div class="days-grid" id="calendar-grid"></div>
+  </div>
+
+</div>
+
+<div class="modal" id="view-modal">
+  <div class="modal-content">
+    <div class="modal-head">
+      <h3 id="modal-date-title">Dia 00</h3>
+      <p>Planejamento da Aula</p>
+    </div>
+    <div id="view-text">Carregando...</div>
+    <button class="btn-close" onclick="closeModal()">Fechar</button>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAs3OTqOeVVzcxlrcM8Th5ObkhtXca69Ac",
+    authDomain: "mindspace-educacao.firebaseapp.com",
+    projectId: "mindspace-educacao",
+    storageBucket: "mindspace-educacao.firebasestorage.app",
+    messagingSenderId: "569394609531",
+    appId: "1:569394609531:web:9ab5ba6bc2181bc5a911de",
+    databaseURL: "https://mindspace-educacao-default-rtdb.firebaseio.com/"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const tasksRef = ref(db, 'daniel_lucca/artes/agenda');
+
+  let date = new Date();
+  let allTasks = {};
+
+  function renderCalendar() {
+    const grid = document.getElementById('calendar-grid');
+    const monthDisplay = document.getElementById('month-display');
+    grid.innerHTML = '';
+
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    monthDisplay.innerText = new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric' }).format(date);
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const lastDay = new Date(year, month + 1, 0).getDate();
+
+    for (let i = 0; i < firstDay; i++) grid.appendChild(document.createElement('div'));
+
+    const today = new Date();
+    for (let i = 1; i <= lastDay; i++) {
+      const dayId = `${year}-${month + 1}-${i}`;
+      const isToday = i === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+      const hasTask = allTasks[dayId] && allTasks[dayId].trim() !== '';
+
+      const dayEl = document.createElement('div');
+      dayEl.className = `day ${isToday ? 'today' : ''} ${hasTask ? 'has-task' : ''}`;
+      dayEl.innerText = i;
+      dayEl.onclick = () => openView(i, dayId);
+      grid.appendChild(dayEl);
+    }
+  }
+
+  window.changeMonth = (val) => {
+    date.setMonth(date.getMonth() + val);
+    renderCalendar();
+  };
+
+  window.openView = (num, id) => {
+    document.getElementById('modal-date-title').innerText = `Dia ${num}`;
+    const text = allTasks[id];
+    document.getElementById('view-text').innerHTML = text
+      ? text
+      : `<span class="empty-note">Nenhum planejamento registrado para este dia.</span>`;
+    document.getElementById('view-modal').style.display = 'flex';
+  };
+
+  window.closeModal = () => {
+    document.getElementById('view-modal').style.display = 'none';
+  };
+
+  onValue(tasksRef, (snapshot) => {
+    allTasks = snapshot.val() || {};
+    renderCalendar();
+  });
+
+  window.onclick = (e) => {
+    if (e.target.id === 'view-modal') closeModal();
+  };
+</script>
+</body>
+</html>

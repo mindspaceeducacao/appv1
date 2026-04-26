@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conteúdos Finalizados</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2224%22%20height=%2224%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22currentColor%22%20stroke-width=%222%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%20class=%22icon%20icon-tabler%20icons-tabler-outline%20icon-tabler-circle-check%22%3E%3Cpath%20stroke=%22none%22%20d=%22M0%200h24v24H0z%22%20fill=%22none%22%20/%3E%3Cpath%20d=%22M3%2012a9%209%200%201%200%2018%200a9%209%200%201%200%20-18%200%22%20/%3E%3Cpath%20d=%22M9%2012l2%202l4%20-4%22%20/%3E%3C/svg%3E">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:        #1d2b64;
+    --royal:       #2b57c3;
+    --sky:         #5c83f1;
+    --gray-blue:   #708ea8;
+    --border-gray: #e0e0e0;
+    --bg:          #f4f7ff;
+    --emerald:     #0ea47a;
+    --amber:       #f59e0b;
+    --pink:        #c2346e;
+
+    --artes:     #8b5cf6;
+    --portugues: #2b57c3;
+    --ciencias:  #0ea47a;
+    --matematica:#f59e0b;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--navy);
+    min-height: 100vh;
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* blobs */
+  .blobs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.11; animation: blobFloat 14s ease-in-out infinite; }
+  .blob1 { width: 480px; height: 480px; background: var(--sky);  top: -100px; left: -100px; animation-delay: 0s; }
+  .blob2 { width: 360px; height: 360px; background: var(--royal); bottom: -60px; right: -80px; animation-delay: -5s; }
+  @keyframes blobFloat {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(24px,-24px) scale(1.04); }
+    66% { transform: translate(-16px,16px) scale(0.96); }
+  }
+
+  .container {
+    width: 100%; max-width: 980px;
+    position: relative; z-index: 1;
+    animation: fadeUp 0.4s ease;
+  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* HEADER */
+  .page-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 2rem;
+  }
+  .btn-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    text-decoration: none; color: var(--gray-blue);
+    font-weight: 600; font-size: 0.82rem;
+    margin-bottom: 0.5rem;
+    transition: color 0.2s ease;
+  }
+  .btn-back:hover { color: var(--royal); }
+
+  .page-header h1 {
+    font-size: 1.7rem; font-weight: 800; letter-spacing: -0.5px;
+  }
+
+  .date-display {
+    display: flex; align-items: center; gap: 7px;
+    background: white; border: 1px solid var(--border-gray);
+    padding: 0.6rem 1rem; border-radius: 12px;
+    font-size: 0.78rem; font-weight: 700; color: var(--gray-blue);
+    white-space: nowrap; flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(29,43,100,0.05);
+  }
+  .date-display i { font-size: 15px; color: var(--sky); }
+
+  /* GRID */
+  .grid-contents {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.1rem;
+  }
+
+  /* WIDGET */
+  .subject-widget {
+    background: white;
+    border: 1px solid var(--border-gray);
+    border-radius: 22px;
+    overflow: hidden;
+    min-height: 200px;
+    display: flex; flex-direction: column;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+  }
+  .subject-widget:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(29,43,100,0.08); }
+
+  /* topo colorido */
+  .widget-stripe {
+    height: 4px; flex-shrink: 0;
+  }
+  .artes    .widget-stripe { background: var(--artes); }
+  .portugues .widget-stripe { background: var(--portugues); }
+  .ciencias  .widget-stripe { background: var(--ciencias); }
+  .matematica .widget-stripe { background: var(--matematica); }
+
+  .widget-inner { padding: 1.4rem 1.4rem 1.4rem; flex: 1; display: flex; flex-direction: column; }
+
+  .widget-head {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 1.1rem; padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-gray);
+  }
+
+  .subject-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .artes     .subject-icon { background: rgba(139,92,246,0.1); color: var(--artes); }
+  .portugues .subject-icon { background: rgba(44,87,195,0.1);  color: var(--portugues); }
+  .ciencias  .subject-icon { background: rgba(14,164,122,0.1); color: var(--ciencias); }
+  .matematica .subject-icon { background: rgba(245,158,11,0.1); color: var(--matematica); }
+
+  .widget-head h2 { font-size: 0.95rem; font-weight: 800; color: var(--navy); }
+
+  .content-count {
+    margin-left: auto;
+    font-size: 0.7rem; font-weight: 800;
+    color: var(--gray-blue);
+    background: var(--bg);
+    border: 1px solid var(--border-gray);
+    padding: 3px 9px; border-radius: 999px;
+  }
+
+  /* ITEMS */
+  .content-list { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+
+  .content-item {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding: 0.75rem 0.9rem;
+    background: var(--bg);
+    border-radius: 12px;
+    border: 1px solid transparent;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .content-item:hover { border-color: var(--border-gray); background: white; }
+
+  .content-info { display: flex; gap: 9px; align-items: flex-start; }
+  .content-info i { font-size: 15px; margin-top: 1px; flex-shrink: 0; }
+
+  .artes     .content-info i { color: var(--artes); }
+  .portugues .content-info i { color: var(--portugues); }
+  .ciencias  .content-info i { color: var(--ciencias); }
+  .matematica .content-info i { color: var(--matematica); }
+
+  .content-name { font-size: 0.82rem; font-weight: 600; line-height: 1.45; color: var(--navy); }
+
+  .date-tag {
+    font-size: 0.63rem; font-weight: 800;
+    color: var(--gray-blue);
+    background: white;
+    border: 1px solid var(--border-gray);
+    padding: 3px 9px; border-radius: 7px;
+    white-space: nowrap; flex-shrink: 0;
+    margin-left: 8px;
+  }
+
+  /* EMPTY */
+  .empty-state {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    flex: 1; min-height: 80px;
+    color: var(--gray-blue);
+    font-size: 0.82rem; font-weight: 500; text-align: center;
+    gap: 6px;
+    border: 1.5px dashed var(--border-gray);
+    border-radius: 14px; padding: 1.5rem;
+  }
+  .empty-state i { font-size: 20px; opacity: 0.4; }
+
+  @media (max-width: 768px) {
+    .grid-contents { grid-template-columns: 1fr; }
+    .page-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="blobs">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+</div>
+
+<div class="container">
+
+  <div class="page-header">
+    <div>
+      <a href="inicio.html" class="btn-back"><i class="ti ti-arrow-left"></i> Voltar ao painel</a>
+      <h1>Conteúdos Finalizados</h1>
+    </div>
+    <div class="date-display">
+      <i class="ti ti-calendar"></i>
+      <span id="current-date">—</span>
+    </div>
+  </div>
+
+  <main class="grid-contents">
+
+    <div class="subject-widget artes">
+      <div class="widget-stripe"></div>
+      <div class="widget-inner">
+        <div class="widget-head">
+          <div class="subject-icon"><i class="ti ti-palette"></i></div>
+          <h2>Artes</h2>
+          <span class="content-count" id="count-artes">0</span>
+        </div>
+        <div class="content-list" id="list-artes"></div>
+      </div>
+    </div>
+
+    <div class="subject-widget portugues">
+      <div class="widget-stripe"></div>
+      <div class="widget-inner">
+        <div class="widget-head">
+          <div class="subject-icon"><i class="ti ti-letter-case"></i></div>
+          <h2>Português</h2>
+          <span class="content-count" id="count-port">0</span>
+        </div>
+        <div class="content-list" id="list-port"></div>
+      </div>
+    </div>
+
+    <div class="subject-widget ciencias">
+      <div class="widget-stripe"></div>
+      <div class="widget-inner">
+        <div class="widget-head">
+          <div class="subject-icon"><i class="ti ti-microscope"></i></div>
+          <h2>Ciências</h2>
+          <span class="content-count" id="count-cien">0</span>
+        </div>
+        <div class="content-list" id="list-cien"></div>
+      </div>
+    </div>
+
+    <div class="subject-widget matematica">
+      <div class="widget-stripe"></div>
+      <div class="widget-inner">
+        <div class="widget-head">
+          <div class="subject-icon"><i class="ti ti-math"></i></div>
+          <h2>Matemática</h2>
+          <span class="content-count" id="count-mat">0</span>
+        </div>
+        <div class="content-list" id="list-mat"></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAs3OTqOeVVzcxlrcM8Th5ObkhtXca69Ac",
+    authDomain: "mindspace-educacao.firebaseapp.com",
+    projectId: "mindspace-educacao",
+    storageBucket: "mindspace-educacao.firebasestorage.app",
+    messagingSenderId: "569394609531",
+    appId: "1:569394609531:web:9ab5ba6bc2181bc5a911de",
+    databaseURL: "https://mindspace-educacao-default-rtdb.firebaseio.com/"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  const hoje = new Date();
+  const meses = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+  const dias  = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+  document.getElementById('current-date').innerText =
+    `${dias[hoje.getDay()]}, ${hoje.getDate()} de ${meses[hoje.getMonth()]}.`;
+
+  const config = [
+    { id: 'list-artes', countId: 'count-artes', path: 'artes/trabalhados' },
+    { id: 'list-port',  countId: 'count-port',  path: 'port/trabalhados'  },
+    { id: 'list-cien',  countId: 'count-cien',  path: 'cien/trabalhados'  },
+    { id: 'list-mat',   countId: 'count-mat',   path: 'mat/trabalhados'   }
+  ];
+
+  config.forEach(({ id, countId, path }) => {
+    const listEl  = document.getElementById(id);
+    const countEl = document.getElementById(countId);
+
+    onValue(ref(db, path), (snapshot) => {
+      listEl.innerHTML = '';
+      const data = snapshot.val();
+
+      if (!data) {
+        countEl.innerText = '0';
+        listEl.innerHTML = `
+          <div class="empty-state">
+            <i class="ti ti-inbox"></i>
+            <p>Nenhum conteúdo finalizado ainda.</p>
+          </div>`;
+        return;
+      }
+
+      const entradas = Object.entries(data).reverse();
+      countEl.innerText = entradas.length;
+
+      entradas.forEach(([, registro]) => {
+        const item = document.createElement('div');
+        item.className = 'content-item';
+        item.innerHTML = `
+          <div class="content-info">
+            <i class="ti ti-circle-check-filled"></i>
+            <span class="content-name">${registro.itens.join(', ')}</span>
+          </div>
+          <span class="date-tag">${registro.data.split('/').slice(0,2).join('/')}</span>`;
+        listEl.appendChild(item);
+      });
+    });
+  });
+</script>
+</body>
+</html>

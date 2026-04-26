@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meus Resultados</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2224%22%20height=%2224%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22currentColor%22%20stroke-width=%222%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%20class=%22icon%20icon-tabler%20icons-tabler-outline%20icon-tabler-chart-bar-popular%22%3E%3Cpath%20stroke=%22none%22%20d=%22M0%200h24v24H0z%22%20fill=%22none%22%20/%3E%3Cpath%20d=%22M3%2013a1%201%200%200%201%201%20-1h4a1%201%200%200%201%201%201v6a1%201%200%200%201%20-1%201h-4a1%201%200%200%201%20-1%20-1l0%20-6%22%20/%3E%3Cpath%20d=%22M9%209a1%201%200%200%201%201%20-1h4a1%201%200%200%201%201%201v10a1%201%200%200%201%20-1%201h-4a1%201%200%200%201%20-1%20-1l0%20-10%22%20/%3E%3Cpath%20d=%22M15%205a1%201%200%200%201%201%20-1h4a1%201%200%200%201%201%201v14a1%201%200%200%201%20-1%201h-4a1%201%200%200%201%20-1%20-1l0%20-14%22%20/%3E%3Cpath%20d=%22M4%2020h14%22%20/%3E%3C/svg%3E">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:        #1d2b64;
+    --royal:       #2b57c3;
+    --sky:         #5c83f1;
+    --gray-blue:   #708ea8;
+    --border-gray: #e0e0e0;
+    --bg:          #f4f7ff;
+
+    --artes:       #f43f5e;
+    --portugues:   #2b57c3;
+    --ciencias:    #0ea47a;
+    --matematica:  #f59e0b;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--navy);
+    min-height: 100vh;
+    padding: 2.5rem 1.5rem 4rem;
+    display: flex;
+    justify-content: center;
+  }
+
+   /* blobs */
+  .blobs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.11; animation: blobFloat 14s ease-in-out infinite; }
+  .blob1 { width: 480px; height: 480px; background: var(--sky);  top: -100px; left: -100px; animation-delay: 0s; }
+  .blob2 { width: 360px; height: 360px; background: var(--royal); bottom: -60px; right: -80px; animation-delay: -5s; }
+  @keyframes blobFloat {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(24px,-24px) scale(1.04); }
+    66% { transform: translate(-16px,16px) scale(0.96); }
+  }
+
+
+  .container {
+    width: 100%;
+    max-width: 860px;
+    animation: fadeUp 0.45s ease;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── HEADER ── */
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2.25rem;
+  }
+  .btn-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    text-decoration: none; color: var(--gray-blue);
+    font-weight: 600; font-size: 0.83rem;
+    margin-bottom: 0.6rem;
+    transition: color 0.2s, transform 0.2s;
+  }
+  .btn-back:hover { color: var(--royal); transform: translateX(-3px); }
+  .page-header h1 {
+    font-size: 1.75rem; font-weight: 800;
+    letter-spacing: -0.5px; color: var(--navy);
+  }
+  .header-meta {
+    text-align: right;
+  }
+  .header-meta .meta-sys {
+    font-size: 0.65rem; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--gray-blue); display: block; margin-bottom: 3px;
+  }
+  .header-meta .meta-scale {
+    font-size: 0.82rem; font-weight: 700; color: var(--navy);
+  }
+
+  /* ── GRID ── */
+  .grid-medias {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  /* ── CARD ── */
+  .subject-card {
+    background: white;
+    border: 1px solid var(--border-gray);
+    border-radius: 24px;
+    padding: 1.75rem;
+    box-shadow: 0 4px 24px rgba(29,43,100,0.07);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    animation: fadeUp 0.5s ease both;
+  }
+  .subject-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 36px rgba(29,43,100,0.12);
+  }
+  .subject-card:nth-child(1) { animation-delay: 0.05s; }
+  .subject-card:nth-child(2) { animation-delay: 0.10s; }
+  .subject-card:nth-child(3) { animation-delay: 0.15s; }
+  .subject-card:nth-child(4) { animation-delay: 0.20s; }
+
+  /* Faixa colorida lateral */
+  .subject-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 5px;
+    border-radius: 24px 0 0 24px;
+  }
+  .portugues::before  { background: var(--portugues); }
+  .matematica::before { background: var(--matematica); }
+  .ciencias::before   { background: var(--ciencias); }
+  .artes::before      { background: var(--artes); }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.25rem;
+  }
+
+  .subject-icon {
+    width: 46px; height: 46px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+  }
+  .portugues  .subject-icon { background: rgba(43,87,195,0.1);  color: var(--portugues); }
+  .matematica .subject-icon { background: rgba(245,158,11,0.1); color: var(--matematica); }
+  .ciencias   .subject-icon { background: rgba(14,164,122,0.1); color: var(--ciencias); }
+  .artes      .subject-icon { background: rgba(244,63,94,0.1);  color: var(--artes); }
+
+  .grade-container { text-align: right; }
+  .grade-label {
+    display: block;
+    font-size: 0.62rem; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--gray-blue); margin-bottom: 2px;
+  }
+  .grade-value {
+    display: block;
+    font-size: 2.6rem; font-weight: 800;
+    letter-spacing: -1px; line-height: 1;
+  }
+  .portugues  .grade-value { color: var(--portugues); }
+  .matematica .grade-value { color: var(--matematica); }
+  .ciencias   .grade-value { color: var(--ciencias); }
+  .artes      .grade-value { color: var(--artes); }
+
+  .subject-name {
+    display: block;
+    font-size: 1rem; font-weight: 800;
+    color: var(--navy); margin-bottom: 0.75rem;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-container {
+    width: 100%; height: 7px;
+    background: var(--bg);
+    border-radius: 10px; overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%; width: 0%;
+    border-radius: 10px;
+    transition: width 1s ease-in-out;
+  }
+  .portugues  .progress-bar { background: var(--portugues); }
+  .matematica .progress-bar { background: var(--matematica); }
+  .ciencias   .progress-bar { background: var(--ciencias); }
+  .artes      .progress-bar { background: var(--artes); }
+
+  @media (max-width: 600px) {
+    .grid-medias { grid-template-columns: 1fr; }
+    .page-header { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    .page-header h1 { font-size: 1.45rem; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="blobs">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+</div>
+
+
+<div class="container">
+
+  <div class="page-header">
+    <div>
+      <a href="inicio.html" class="btn-back">
+        <i class="ti ti-arrow-left"></i> Voltar ao painel
+      </a>
+      <h1>Desempenho Geral</h1>
+    </div>
+    <div class="header-meta">
+      <span class="meta-sys">Sistema MindSpace</span>
+      <span class="meta-scale">Escala 0 – 100</span>
+    </div>
+  </div>
+
+  <div class="grid-medias">
+
+    <div class="subject-card portugues">
+      <div class="card-top">
+        <div class="subject-icon"><i class="ti ti-vocabulary"></i></div>
+        <div class="grade-container">
+          <span class="grade-label">Média Atual</span>
+          <span class="grade-value" id="desk-port">—</span>
+        </div>
+      </div>
+      <span class="subject-name">Português</span>
+      <div class="progress-container">
+        <div class="progress-bar" id="bar-port"></div>
+      </div>
+    </div>
+
+    <div class="subject-card matematica">
+      <div class="card-top">
+        <div class="subject-icon"><i class="ti ti-math-symbols"></i></div>
+        <div class="grade-container">
+          <span class="grade-label">Média Atual</span>
+          <span class="grade-value" id="desk-mat">—</span>
+        </div>
+      </div>
+      <span class="subject-name">Matemática</span>
+      <div class="progress-container">
+        <div class="progress-bar" id="bar-mat"></div>
+      </div>
+    </div>
+
+    <div class="subject-card ciencias">
+      <div class="card-top">
+        <div class="subject-icon"><i class="ti ti-flask"></i></div>
+        <div class="grade-container">
+          <span class="grade-label">Média Atual</span>
+          <span class="grade-value" id="desk-cien">—</span>
+        </div>
+      </div>
+      <span class="subject-name">Ciências</span>
+      <div class="progress-container">
+        <div class="progress-bar" id="bar-cien"></div>
+      </div>
+    </div>
+
+    <div class="subject-card artes">
+      <div class="card-top">
+        <div class="subject-icon"><i class="ti ti-palette"></i></div>
+        <div class="grade-container">
+          <span class="grade-label">Média Atual</span>
+          <span class="grade-value" id="desk-artes">—</span>
+        </div>
+      </div>
+      <span class="subject-name">Artes</span>
+      <div class="progress-container">
+        <div class="progress-bar" id="bar-artes"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAs3OTqOeVVzcxlrcM8Th5ObkhtXca69Ac",
+    authDomain: "mindspace-educacao.firebaseapp.com",
+    projectId: "mindspace-educacao",
+    databaseURL: "https://mindspace-educacao-default-rtdb.firebaseio.com/"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  function calcularNota(data) {
+    if (!data) return 0;
+    const campos = ['n1', 'n2', 'n3', 'n_outros', 'n_prova'];
+    let soma = 0;
+    campos.forEach(c => { if (data[c]) soma += parseFloat(data[c]) || 0; });
+    return soma;
+  }
+
+  const materias = [
+    { path: 'dlucca/port',   mob: 'mob-port',   desk: 'desk-port',   bar: 'bar-port'  },
+    { path: 'dlucca/mat',    mob: 'mob-mat',    desk: 'desk-mat',    bar: 'bar-mat'   },
+    { path: 'hadassa/cien',  mob: 'mob-cien',   desk: 'desk-cien',   bar: 'bar-cien'  },
+    { path: 'hadassa/artes', mob: 'mob-artes',  desk: 'desk-artes',  bar: 'bar-artes' }
+  ];
+
+  materias.forEach(item => {
+    onValue(ref(db, item.path), (snapshot) => {
+      const nota = calcularNota(snapshot.val());
+      const notaFormatada = nota.toFixed(1);
+
+      const elMob  = document.getElementById(item.mob);
+      const elDesk = document.getElementById(item.desk);
+      if (elMob)  elMob.innerText  = notaFormatada;
+      if (elDesk) elDesk.innerText = notaFormatada;
+
+      const elBar = document.getElementById(item.bar);
+      if (elBar) elBar.style.width = (nota * 1) + "%";
+    });
+  });
+</script>
+</body>
+</html>
