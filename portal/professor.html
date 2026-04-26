@@ -8,133 +8,208 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2224%22%20height=%2224%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22%231d2b64%22%20stroke-width=%222%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%20class=%22icon%20icon-tabler%20icons-tabler-outline%20icon-tabler-chalkboard%22%3E%3Cpath%20stroke=%22none%22%20d=%22M0%200h24v24H0z%22%20fill=%22none%22%20/%3E%3Cpath%20d=%22M8%2019h-3a2%202%200%200%201%20-2%20-2v-10a2%202%200%200%201%202%20-2h14a2%202%200%200%201%202%202v11a1%201%200%200%201%20-1%201%22%20/%3E%3Cpath%20d=%22M11%2017a1%201%200%200%201%201%20-1h4a1%201%200%200%201%201%201v1a1%201%200%200%201%20-1%201h-4a1%201%200%200%201%20-1%20-1l0%20-1%22%20/%3E%3C/svg%3E">
 <style>
-  /* MANTIVE SEU CSS ORIGINAL */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --navy: #0f172a;
-    --royal: #2563eb;
-    --sky: #3b82f6;
-    --gray-blue: #64748b;
-    --border-gray: #e2e8f0;
-    --bg: #f8fafc;
+    --navy: #1d2b64;
+    --royal: #2b57c3;
+    --sky: #5c83f1;
+    --gray-blue: #708ea8;
+    --border-gray: #e0e0e0;
+    --bg: #f4f7ff;
   }
 
-  body { 
-    font-family: 'Plus Jakarta Sans', sans-serif; 
-    background: var(--bg); 
-    background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-    background-size: 30px 30px;
-    color: var(--navy); 
-    min-height: 100vh; 
-    display: flex; 
-    align-items: center; 
+  html, body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    height: 100%;
+    background: var(--bg);
+  }
+  body {
+    display: flex;
+    align-items: center;
     justify-content: center;
-    overflow: hidden; 
+    min-height: 100vh;
+    padding: 2rem;
   }
 
-  .blobs { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
-  .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.15; animation: blobFloat 20s ease-in-out infinite; }
-  .blob1 { width: 600px; height: 600px; background: var(--royal); top: -100px; right: -100px; }
-  .blob2 { width: 400px; height: 400px; background: var(--sky); bottom: -50px; left: -50px; animation-delay: -5s; }
-  
+  /* blobs */
+  .blobs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.15; animation: blobFloat 14s ease-in-out infinite; }
+  .blob1 { width: 520px; height: 520px; background: var(--sky); top: -120px; left: -120px; animation-delay: 0s; }
+  .blob2 { width: 420px; height: 420px; background: var(--royal); bottom: -60px; right: -100px; animation-delay: -5s; }
   @keyframes blobFloat {
-    0%, 100% { transform: translate(0,0) scale(1); }
-    50% { transform: translate(30px, -50px) scale(1.1); }
+    0%,100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(28px,-28px) scale(1.04); }
+    66% { transform: translate(-18px,18px) scale(0.96); }
   }
 
-  .teacher-card {
+  /* card */
+  .card {
     position: relative;
     z-index: 1;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    width: 1000px;
     display: flex;
-    border-radius: 32px;
-    box-shadow: 0 40px 100px rgba(15, 23, 42, 0.15);
-    overflow: hidden;
-    border: 1px solid white;
-  }
-
-  .welcome-side {
-    flex: 1;
-    background: var(--navy);
-    padding: 4.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: white;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .header-icon-teacher {
-    width: 72px;
-    height: 72px;
-    background: linear-gradient(135deg, #3d4655, var(--gray-blue));
-    border-radius: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 32px;
-    color: white;
-    margin-bottom: 2.5rem;
-  }
-
-  .welcome-side h1 { font-size: 2.8rem; font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -1.5px; }
-  .welcome-side p { font-size: 1.1rem; opacity: 0.6; line-height: 1.6; }
-
-  .disciplinas-badge { margin-top: 3rem; display: flex; gap: 8px; flex-wrap: wrap; }
-  .badge { padding: 6px 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1); border-radius: 99px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
-
-  .login-side { flex: 1.3; padding: 5rem 6.5rem; display: flex; flex-direction: column; justify-content: center; background: white; }
-  .login-side h2 { font-size: 2rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; }
-  .subtitle { color: var(--gray-blue); font-size: 0.95rem; margin-bottom: 3rem; display: block; }
-
-  .input-group { margin-bottom: 1.5rem; position: relative; }
-  .input-group i.main-icon { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); color: var(--gray-blue); font-size: 1.3rem; }
-
-  .teacher-input {
     width: 100%;
-    padding: 1.3rem 3.5rem 1.3rem 3.8rem;
-    border: 2px solid var(--border-gray);
-    border-radius: 20px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--navy);
-    outline: none;
-    background: #f8fafc;
+    max-width: 900px;
+    min-height: 540px;
+    background: white;
+    border-radius: 28px;
+    border: 1px solid var(--border-gray);
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(29,43,100,0.1);
+    animation: fadeUp 0.5s ease both;
   }
-
-  .teacher-input:focus { border-color: var(--royal); background: white; }
-
-  .toggle-password { position: absolute; right: 22px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--gray-blue); cursor: pointer; font-size: 1.3rem; }
-
-  .btn-teacher {
-    width: 100%;
-    padding: 1.4rem;
-    background: var(--navy);
-    color: white;
-    border: none;
-    border-radius: 20px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 1rem;
-  }
-
-  .error-msg { color: #ef4444; font-size: 0.9rem; margin-top: 1.5rem; font-weight: 700; text-align: center; display: none; }
-  .back-link { margin-top: 3.5rem; text-decoration: none; font-size: 0.95rem; font-weight: 700; color: var(--gray-blue); display: flex; align-items: center; justify-content: center; gap: 10px; }
-
+  @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
   @keyframes shake {
-    0%, 100% { transform: translateX(0); }
+    0%,100% { transform: translateX(0); }
     25% { transform: translateX(-8px); }
     75% { transform: translateX(8px); }
   }
+
+  /* LADO ESQUERDO */
+  .left-side {
+    flex: 1;
+    background: linear-gradient(150deg, var(--navy) 0%, #1a3580 60%, var(--royal) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .left-side::before {
+    content: '';
+    position: absolute;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.07);
+    top: -80px; left: -80px;
+  }
+  .left-side::after {
+    content: '';
+    position: absolute;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.06);
+    bottom: -50px; right: -50px;
+  }
+
+  .left-icon {
+    position: relative; z-index: 1;
+    width: 60px; height: 60px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; color: white;
+    margin-bottom: 2rem;
+  }
+  .left-title {
+    position: relative; z-index: 1;
+    font-size: 2.1rem; font-weight: 800;
+    color: white; line-height: 1.15;
+    margin-bottom: 0.8rem;
+  }
+  .left-desc {
+    position: relative; z-index: 1;
+    font-size: 0.88rem; color: rgba(255,255,255,0.55);
+    line-height: 1.7; max-width: 260px;
+    margin-bottom: 2.2rem;
+  }
+  .badges {
+    position: relative; z-index: 1;
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .badge {
+    padding: 5px 13px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 999px;
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* LADO DIREITO */
+  .right-side {
+    width: 400px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem 2.8rem;
+    border-left: 1px solid var(--border-gray);
+    background: white;
+  }
+
+  .portal-logo { margin-bottom: 2rem; }
+  .portal-logo img { height: 28px; }
+
+  .form-title { font-size: 1.55rem; font-weight: 800; color: var(--navy); margin-bottom: 0.4rem; }
+  .form-sub { font-size: 0.85rem; color: var(--gray-blue); margin-bottom: 2rem; line-height: 1.6; }
+
+  .input-group { position: relative; margin-bottom: 1rem; }
+  .input-icon {
+    position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+    color: var(--gray-blue); font-size: 18px; pointer-events: none;
+  }
+  .field {
+    width: 100%;
+    padding: 0.85rem 1rem 0.85rem 2.8rem;
+    border: 1.5px solid var(--border-gray);
+    border-radius: 14px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.92rem; font-weight: 500;
+    color: var(--navy);
+    background: #fafbff;
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  }
+  .field::placeholder { color: var(--gray-blue); font-weight: 400; }
+  .field:focus { border-color: var(--royal); background: white; box-shadow: 0 0 0 3px rgba(44,87,195,0.08); }
+
+  .toggle-pass {
+    position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer;
+    color: var(--gray-blue); font-size: 17px;
+    transition: color 0.2s;
+  }
+  .toggle-pass:hover { color: var(--royal); }
+
+  .btn-submit {
+    width: 100%;
+    padding: 0.95rem;
+    background: linear-gradient(135deg, var(--navy), #2a3d8c);
+    color: white;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem; font-weight: 700;
+    border: none; border-radius: 14px;
+    cursor: pointer; margin-top: 0.5rem;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+  }
+  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(29,43,100,0.25); filter: brightness(1.08); }
+  .btn-submit:active { transform: translateY(0); }
+
+  .error-msg {
+    display: none;
+    color: #dc2626;
+    font-size: 0.8rem; font-weight: 600;
+    text-align: center;
+    margin-top: 1rem;
+    padding: 0.6rem 1rem;
+    background: rgba(220,38,38,0.07);
+    border-radius: 10px;
+    border: 1px solid rgba(220,38,38,0.15);
+  }
+
+  .back-link {
+    margin-top: 2rem;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    text-decoration: none;
+    font-size: 0.8rem; font-weight: 600;
+    color: var(--gray-blue);
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--royal); }
 </style>
 </head>
 <body>
@@ -144,15 +219,14 @@
   <div class="blob blob2"></div>
 </div>
 
-<div class="teacher-card">
-  <div class="welcome-side">
-    <div class="header-icon-teacher">
-      <i class="ti ti-presentation-analytics"></i>
-    </div>
-    <h1>Espaço do<br>Docente</h1>
-    <p>Acesse o centro de controle pedagógico para gerenciar turmas e conteúdos digitais.</p>
-    
-    <div class="disciplinas-badge">
+<div class="card" id="mainCard">
+
+  <!-- ESQUERDA -->
+  <div class="left-side">
+    <div class="left-icon"><i class="ti ti-presentation-analytics"></i></div>
+    <h1 class="left-title">Espaço do<br>Docente</h1>
+    <p class="left-desc">Acesse o centro pedagógico para gerenciar turmas e conteúdos digitais.</p>
+    <div class="badges">
       <span class="badge">Artes</span>
       <span class="badge">Ciências</span>
       <span class="badge">Português</span>
@@ -160,80 +234,83 @@
     </div>
   </div>
 
-  <div class="login-side">
-    <h2>Entrar na conta</h2>
-    <span class="subtitle">Bem-vindo de volta! Insira seus dados.</span>
+  <!-- DIREITA -->
+  <div class="right-side">
+    <div class="portal-logo">
+      <img src="https://i.ibb.co/5Xt1fpRP/Mind-Space-Logo.png" alt="MindSpace"/>
+    </div>
+
+    <h2 class="form-title">Entrar na conta</h2>
+    <p class="form-sub">Bem-vindo de volta! Insira seus dados.</p>
 
     <form id="teacherForm">
       <div class="input-group">
-        <i class="ti ti-mail-opened main-icon"></i>
-        <input type="text" id="user" class="teacher-input" placeholder="Usuário ou ID" required>
+        <i class="ti ti-mail-opened input-icon"></i>
+        <input type="text" id="user" class="field" placeholder="Usuário ou ID" required />
       </div>
 
       <div class="input-group">
-        <i class="ti ti-lock-square-rounded main-icon"></i>
-        <input type="password" id="pass" class="teacher-input" placeholder="Senha" required>
-        <button type="button" class="toggle-password" id="togglePass">
+        <i class="ti ti-lock-square-rounded input-icon"></i>
+        <input type="password" id="pass" class="field" placeholder="Senha" required />
+        <button type="button" class="toggle-pass" id="togglePass">
           <i class="ti ti-eye" id="eyeIcon"></i>
         </button>
       </div>
 
-      <button type="submit" class="btn-teacher">
+      <button type="submit" class="btn-submit">
         Entrar no Painel
         <i class="ti ti-arrow-right"></i>
       </button>
 
-      <p id="errorMsg" class="error-msg">Credenciais inválidas. Tente novamente.</p>
+      <p class="error-msg" id="errorMsg">Credenciais inválidas. Tente novamente.</p>
     </form>
 
-    <a href="https://mindspaceeducacao.github.io/app/index.html" class="back-link">
+    <a href="https://mindspaceeducacao.github.io/app/portal.html" class="back-link">
       <i class="ti ti-arrow-narrow-left"></i> Voltar para Perfis
     </a>
   </div>
+
 </div>
 
 <script>
-  // Link Único para todos os professores
-  const URL_PAINEL = "http://mindspaceeducacao.github.io/app/professor/dashboard"; 
+  const URL_PAINEL = "Prof.html";
 
   const accounts = {
     "hadassaartes": { pass: "hbmind26", materia: "Artes" },
-    "dluccaport":  { pass: "dlmind26", materia: "Português" },
-    "hadassacien": { pass: "hbmind26", materia: "Ciências" },
-    "dluccamat":   { pass: "dlmind26", materia: "Matemática" }
+    "dluccaport":   { pass: "dlmind26", materia: "Português" },
+    "hadassacien":  { pass: "hbmind26", materia: "Ciências" },
+    "dluccamat":    { pass: "dlmind26", materia: "Matemática" }
   };
 
+  // toggle senha
   const passInput = document.getElementById('pass');
-  const toggleBtn = document.getElementById('togglePass');
-  const eyeIcon = document.getElementById('eyeIcon');
-
-  toggleBtn.addEventListener('click', () => {
+  document.getElementById('togglePass').addEventListener('click', () => {
     const isPass = passInput.type === 'password';
     passInput.type = isPass ? 'text' : 'password';
-    eyeIcon.className = isPass ? 'ti ti-eye-off' : 'ti ti-eye';
+    document.getElementById('eyeIcon').className = isPass ? 'ti ti-eye-off' : 'ti ti-eye';
   });
 
+  // submit
   document.getElementById('teacherForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const user = document.getElementById('user').value.toLowerCase().trim();
     const pass = document.getElementById('pass').value;
     const error = document.getElementById('errorMsg');
+    const card  = document.getElementById('mainCard');
 
     if (accounts[user] && accounts[user].pass === pass) {
-      // SALVANDO A SESSÃO NO NAVEGADOR
       sessionStorage.setItem('logado', 'true');
       sessionStorage.setItem('usuario', user);
       sessionStorage.setItem('materia', accounts[user].materia);
-      
-      // Redireciona para o link comum
       window.location.href = URL_PAINEL;
     } else {
       error.style.display = 'block';
-      document.querySelector('.teacher-card').style.animation = 'shake 0.5s ease';
-      setTimeout(() => { document.querySelector('.teacher-card').style.animation = ''; }, 500);
+      card.style.animation = 'shake 0.45s ease';
+      setTimeout(() => { card.style.animation = ''; }, 450);
     }
   });
 </script>
 
 </body>
 </html>
+
