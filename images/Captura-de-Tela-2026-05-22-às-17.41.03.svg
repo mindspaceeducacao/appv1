@@ -103,7 +103,7 @@ l197 0 0 55 c0 160 -70 280 -199 338 -66 30 -218 34 -283 8z m220 -117 c20 -8
   </mask>
 
   <!-- Parte preta -->
-  <rect width="994" height="214" fill="black"
+  <rect width="980" height="214" fill="black"
         mask="url(#logo-mask)"/>
 
   <!-- Parte azul -->
