@@ -7,16 +7,12 @@
 
 <defs>
   <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-
-    <!-- Azul até 25% -->
     <stop offset="25%" stop-color="#3774FF"/>
-
-    <!-- Preto depois -->
     <stop offset="25%" stop-color="black"/>
-
+    <stop offset="100%" stop-color="black"/>
   </linearGradient>
 </defs>
-  
+
 <g transform="translate(0.000000,214.000000) scale(0.100000,-0.100000)"
 fill="url(#logoGradient)" stroke="none">
 <path d="M989 1878 c-1 -7 -5 -123 -8 -257 l-6 -244 -44 119 c-24 65 -61 169
