@@ -6,7 +6,7 @@
  preserveAspectRatio="xMidYMid meet">
 
 <g transform="translate(0.000000,214.000000) scale(0.100000,-0.100000)"
-fill="#000000" stroke="none">
+fill="url(#logoGradient)" stroke="none">
 <path d="M989 1878 c-1 -7 -5 -123 -8 -257 l-6 -244 -44 119 c-24 65 -61 169
 -82 229 -25 71 -44 111 -55 113 -24 6 -74 -18 -74 -35 0 -8 26 -88 59 -176 62
 -172 87 -255 79 -262 -4 -4 -189 217 -265 317 -32 43 -42 45 -73 20 -40 -32
