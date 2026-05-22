@@ -107,6 +107,6 @@ l197 0 0 55 c0 160 -70 280 -199 338 -66 30 -218 34 -283 8z m220 -117 c20 -8
         mask="url(#logo-mask)"/>
 
   <!-- Parte azul -->
-  <rect width="240" height="214" fill="#3774FF"
+  <rect width="238" height="214" fill="#3774FF"
         mask="url(#logo-mask)"/>
 </svg>
