@@ -1,30 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-width="996pt"
-height="214pt"
-viewBox="0 0 996 214"
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+
+<svg version="1.0"
+xmlns="http://www.w3.org/2000/svg"
+width="996.000000pt"
+height="214.000000pt"
+viewBox="0 0 996.000000 214.000000"
 preserveAspectRatio="xMidYMid meet">
 
-  <defs>
-    <linearGradient id="logoGradient"
-                    x1="0%"
-                    y1="0%"
-                    x2="100%"
-                    y2="0%">
+<defs>
+  <linearGradient id="logoGradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%">
 
-      <!-- 1/4 azul -->
-      <stop offset="0%" stop-color="#3774FF"/>
-      <stop offset="25%" stop-color="#3774FF"/>
+    <!-- azul -->
+    <stop offset="0%" stop-color="#3774FF"/>
+    <stop offset="25%" stop-color="#3774FF"/>
 
-      <!-- resto preto -->
-      <stop offset="25%" stop-color="black"/>
-      <stop offset="100%" stop-color="black"/>
+    <!-- preto -->
+    <stop offset="25%" stop-color="#000000"/>
+    <stop offset="100%" stop-color="#000000"/>
 
-    </linearGradient>
-  </defs>
+  </linearGradient>
+</defs>
 
-  <g transform="translate(0,214) scale(0.1,-0.1)"
-     fill="url(#logoGradient)"
-     stroke="none">
+<g transform="translate(0.000000,214.000000) scale(0.100000,-0.100000)"
+fill="url(#logoGradient)"
+stroke="none">
 
     <!-- seus paths aqui -->
 <path d="M989 1878 c-1 -7 -5 -123 -8 -257 l-6 -244 -44 119 c-24 65 -61 169
