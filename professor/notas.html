@@ -243,7 +243,7 @@
     const data = snapshot.val();
     if (data) {
       campos.forEach(campo => {
-        if (data[campo.id] !== undefined) campo.value = data[campo.id]; });
+        if (data[campo.id] !== undefined) campo.value = data[campo.id];
       });
       calcularMedia();
     }
