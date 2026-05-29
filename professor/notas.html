@@ -225,16 +225,19 @@
   const camposNotas = document.querySelectorAll('.val');
   const displayMedia = document.getElementById('media_final');
 
-  function calcularMedia() {
-    let total = 0;
-    camposNotas.forEach(nota => {
-      let valor = parseFloat(nota.value) || 0;
-      let maximo = parseFloat(nota.getAttribute('data-max'));
-      if (valor > maximo) { valor = maximo; nota.value = maximo; }
-      total += valor;
-    });
-    displayMedia.value = total.toFixed(1);
-  }
+ function calcularMedia() { 
+    let total = 0; 
+    camposNotas.forEach(nota => { 
+        let valor = parseFloat(nota.value) || 0; 
+        let maximo = parseFloat(nota.getAttribute('data-max')); 
+        if (valor > maximo) { 
+            valor = maximo; 
+            nota.value = maximo; 
+        } 
+        total += valor; 
+    }); 
+    displayMedia.value = (total / 2).toFixed(1); 
+}
 
   onValue(dbRef, (snapshot) => {
     const data = snapshot.val();
@@ -255,4 +258,5 @@
 </script>
 </body>
 </html>
+
 
