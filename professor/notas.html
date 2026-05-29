@@ -234,10 +234,9 @@
             valor = maximo; 
             nota.value = maximo; 
         } 
-        total += valor; 
-    total = (total / 2);
+        total += valor;
     }); 
-    displayMedia.value = total.toFixed(1); 
+    displayMedia.value = (total / 2).toFixed(1); 
 }
 
   onValue(dbRef, (snapshot) => {
