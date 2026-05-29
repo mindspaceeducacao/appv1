@@ -243,7 +243,7 @@
     const data = snapshot.val();
     if (data) {
       campos.forEach(campo => {
-        if (data[campo.id] !== undefined) campo.value = data[campo.id];
+        if (data[campo.id] !== undefined) campo.value = Number(data[campo.id]) / 2;
       });
       calcularMedia();
     }
@@ -252,8 +252,7 @@
   campos.forEach(campo => {
     campo.addEventListener('input', () => {
       if (campo.classList.contains('val')) calcularMedia();
-      const valorDividido = Number(campo.value) / 2;
-      update(dbRef, { [campo.id]: valorDividido });
+      update(dbRef, { [campo.id]: campo.value });
     });
   });
 </script>
