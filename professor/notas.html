@@ -235,15 +235,16 @@
             nota.value = maximo; 
         } 
         total += valor; 
+    total = (total / 2);
     }); 
-    displayMedia.value = (total / 2).toFixed(1); 
+    displayMedia.value = total.toFixed(1); 
 }
 
   onValue(dbRef, (snapshot) => {
     const data = snapshot.val();
     if (data) {
       campos.forEach(campo => {
-        if (data[campo.id] !== undefined) campo.value = Number(data[campo.id]) / 2;
+        if (data[campo.id] !== undefined) campo.value = data[campo.id]; });
       });
       calcularMedia();
     }
