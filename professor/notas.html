@@ -252,7 +252,8 @@
   campos.forEach(campo => {
     campo.addEventListener('input', () => {
       if (campo.classList.contains('val')) calcularMedia();
-      update(dbRef, { [campo.id]: campo.value });
+      const valorDividido = Number(campo.value) / 2;
+      update(dbRef, { [campo.id]: valorDividido });
     });
   });
 </script>
